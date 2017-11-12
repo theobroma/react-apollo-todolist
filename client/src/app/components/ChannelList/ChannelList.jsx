@@ -4,7 +4,7 @@ import {
   graphql
 } from 'react-apollo';
 
-const ChannelsList = ({ data: {loading, error, channels }}) => {
+const TodoList = ({ data: {loading, error, todoarr }}) => {
    if (loading) {
      return <p>Loading ...</p>;
    }
@@ -13,17 +13,18 @@ const ChannelsList = ({ data: {loading, error, channels }}) => {
    }
 
    return <ul className="list-group">
-     { channels.map( ch => <li className="list-group-item"key={ch.id}>{ch.name}</li> ) }
+     { todoarr.map( item => <li className="list-group-item"key={item.id}>{item.title}</li> ) }
    </ul>;
  };
 
-const channelsListQuery = gql`
-   query ChannelsListQuery {
-     channels {
+const TodoListQuery = gql`
+   query TodoListQuery {
+     todoarr {
        id
-       name
+       title
+       completed
      }
    }
  `;
-const ChannelsListWithData = graphql(channelsListQuery)(ChannelsList);
-export default ChannelsListWithData;
+const TodoListWithData = graphql(TodoListQuery)(TodoList);
+export default TodoListWithData;
