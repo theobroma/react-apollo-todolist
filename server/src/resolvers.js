@@ -1,61 +1,20 @@
-const channels = [{
-  id: 1,
-  name: 'soccer',
-}, {
-  id: 2,
-  name: 'baseball',
-}];
-
-const todoarr = [{
-  id: 1,
-  title: 'first',
-  completed:true
-}, {
-  id: 2,
-  title: 'second',
-  completed:false
-},{
-  id: 3,
-  title: 'third',
-  completed:false
-}];
-
-
-let nextId = 4;
-
-export const resolvers = {
+export const resolvers =  {
   Query: {
-    todoarr: () => {
-      return todoarr;
-    },
-    todo: (root, { id }) => {
-      return todoarr.find(todo => todo.id == id);
-    },
-  },
-  Mutation: {
-    addTodo: (root, args) => {
-      const newTodo = { id: nextId++, title: args.title };
-      todoarr.push(newTodo);
-      return newTodo;
+    todoarr: async (parent, args, { Todo }) => {
+      // { _id: 123123, name: "whatever"}
+      const todosArr = await Todo.find();
+      return todosArr.map((x) => {
+        x._id = x._id.toString();
+        return x;
+      });
     },
   },
+   Mutation: {
+    addTodo: async (parent, args, { Todo }) => {
+      // { _id: 123123, name: "whatever"}
+      const todo = await new Todo(args).save();
+      todo._id = todo._id.toString();
+      return todo;
+    },
+  },  
 };
-
-
-/*export const resolvers = {
-  Query: {
-    channels: () => {
-      return channels;
-    },
-    channel: (root, { id }) => {
-      return channels.find(channel => channel.id == id);
-    },
-  },
-  Mutation: {
-    addChannel: (root, args) => {
-      const newChannel = { id: nextId++, name: args.name };
-      channels.push(newChannel);
-      return newChannel;
-    },
-  },
-};*/

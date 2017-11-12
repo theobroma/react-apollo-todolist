@@ -1,0 +1,6 @@
+//get all todos
+query{
+  todoarr{
+    id,title,completed
+  }
+}

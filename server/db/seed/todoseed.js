@@ -17,9 +17,6 @@ mongoose.connect(mongoUri, {
 })
 .catch(err => debug(`Database connection error: ${err.message}`));
 
-
-
-
 const arr = [
   new Todo({
     title:"first mongo todo",
