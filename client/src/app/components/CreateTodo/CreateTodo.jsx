@@ -4,12 +4,13 @@ import {
   graphql
 } from 'react-apollo';
 
-const CreateChannel = ({mutate}) => {
+const CreateTodo = ({mutate}) => {
+  
     const handleKeyUp = (evt) => {
       if (evt.keyCode === 13) {
         evt.persist();
         mutate({
-          variables: { name: evt.target.value }
+          variables: { title: evt.target.value }
         })
         .then( res => {
           evt.target.value = '';
@@ -25,19 +26,18 @@ const CreateChannel = ({mutate}) => {
       onKeyUp={handleKeyUp}
     />
   );
+
 };
 
-const CreateChannelMutation = gql`
-  mutation addChannel($name: String!) {
-    addChannel(name: $name) {
+const CreateTodoMutation = gql`
+  mutation addTodo($title: String!) {
+    addTodo(title: $title) {
       id
-      name
+      title
     }
   }
 `;
 
-const CreateChannelWithMutation = graphql(
-  CreateChannelMutation
-)(CreateChannel);
+const CreateTodoWithMutation = graphql(CreateTodoMutation)(CreateTodo);
 
-export default CreateChannelWithMutation;
+export default CreateTodoWithMutation;
