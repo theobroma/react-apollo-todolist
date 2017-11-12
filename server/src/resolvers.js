@@ -33,10 +33,10 @@ export const resolvers = {
     },
   },
   Mutation: {
-    addChannel: (root, args) => {
-      const newChannel = { id: nextId++, name: args.name };
-      todoarr.push(newChannel);
-      return newChannel;
+    addTodo: (root, args) => {
+      const newTodo = { id: nextId++, title: args.title };
+      todoarr.push(newTodo);
+      return newTodo;
     },
   },
 };

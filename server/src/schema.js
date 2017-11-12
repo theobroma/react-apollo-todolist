@@ -10,7 +10,7 @@ const typeDefs = `
     }
 
     # This type specifies the entry points into our API. In this case
-    # there is only one - "channels" - which returns a list of channels.
+    # there is only one - "todoarr" - which returns a list of todos.
     type Query {
       todoarr: [TodoType]    # "[]" means this is a list of todos
       todo(id: ID!): TodoType
@@ -18,8 +18,8 @@ const typeDefs = `
 
     # The mutation root type, used to define all mutations.
     type Mutation {
-      # A mutation to add a new channel to the list of channels
-      addChannel(title: String!): TodoType
+      # A mutation to add a new todo to the list of todos
+      addTodo(title: String!): TodoType
     }
     `;
 
