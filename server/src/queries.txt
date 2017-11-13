@@ -4,3 +4,10 @@ query{
     id,title,completed
   }
 }
+
+//add todo
+mutation{
+  addTodo(title:"another todo"){
+    id,title,completed
+  }
+}

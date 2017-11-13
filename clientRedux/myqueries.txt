@@ -1,0 +1,30 @@
+query{
+  allTodos{
+  	_id,
+    text,
+    complete
+  }
+}
+
+mutation {
+  createTodo(text:"hello", complete: false) {
+  	_id,
+    text,
+    complete
+  }
+}
+
+===========================================================
+query{
+  allCats{
+  	_id,
+    name
+  }
+}
+
+mutation {
+  createCat(name:"Tyulen") {
+  	_id,
+    name
+  }
+}

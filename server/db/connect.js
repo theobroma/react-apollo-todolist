@@ -6,7 +6,7 @@ const db = process.env.MONGODB_URI || 'mongodb://localhost/apollotodo';
 const connect = () => {
   // Find the appropriate database to connect to, default to localhost if not found.
   const connectDb = () => {
-    mongoose.Promise = require('bluebird');
+    mongoose.Promise = global.Promise;
     mongoose.connect(db, (err) => {
       if (err) {
         console.log(`===>  Error connecting to ${db}`);

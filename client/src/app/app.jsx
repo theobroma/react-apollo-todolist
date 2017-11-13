@@ -1,8 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import '../style/app.scss';
-import TodolList from './components/TodoList/TodoList';
-import CreateTodo from './components/CreateTodo/CreateTodo';
+import TodoApp from './components/TodoApp';
+
 import {
  ApolloClient,
  ApolloProvider,
@@ -23,19 +24,28 @@ const client = new ApolloClient({
    networkInterface,
 });
 
-let app = document.querySelector('#app');
+function filter (state = 'SHOW_ALL', action) {
+  if (action.type === 'SET_FILTER') {
+    return action.filter
+  }
+  return state
+}
+
+const combinedReducer = combineReducers({
+  filter,
+  apollo: client.reducer(),
+})
+
+const store = compose(
+  applyMiddleware(
+    client.middleware(),
+  ),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+)(createStore)(combinedReducer)
 
 render(
-    <ApolloProvider client={client}>
-      <div className="App">
-        <h3 className="center">React , GraphQL , Apollo</h3>
-        <div className="row">
-            <div className="col-lg-4 col-lg-offset-4">
-                <CreateTodo /><br/>
-                <TodolList />
-            </div>
-        </div>
-      </div>
+    <ApolloProvider client={client} store={store} >
+      <TodoApp />
     </ApolloProvider>,
-    app
+    document.getElementById('root')
 )

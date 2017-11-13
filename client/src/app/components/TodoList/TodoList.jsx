@@ -4,6 +4,23 @@ import {
   graphql
 } from 'react-apollo';
 
+class TodoListNew extends Component {
+  render() {
+    const { loading, error, todoarr } = this.props.data;
+    return (
+      <div>
+        <ul className="list-group">
+        { todoarr.map( item => <li className="list-group-item"key={item.id}>{item.title}</li> ) }
+        </ul>
+        {console.log(todoarr)}
+        <pre>{JSON.stringify(this.props, '', 4)}</pre>
+      </div>
+    )
+  }
+}
+
+
+
 const TodoList = ({ data: {loading, error, todoarr }}) => {
    if (loading) {
      return <p>Loading ...</p>;
