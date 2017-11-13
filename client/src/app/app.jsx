@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import '../style/app.scss';
+import './style.scss';
 import TodoApp from './components/TodoApp';
 
 import {

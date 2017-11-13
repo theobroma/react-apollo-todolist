@@ -24,7 +24,7 @@ class TodoApp extends Component  {
         )
     }
 };
-
+//old
 const TodoListQuery = gql`
 query TodoListQuery {
   todoarr {
