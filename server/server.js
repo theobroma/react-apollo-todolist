@@ -43,19 +43,19 @@ const connect = () => {
 connect();
 
 const PORT = 7700;
-const server = express();
+const app = express();
 //same port as client use http://localhost:3000
-server.use('*', cors({ origin: 'http://localhost:3000' }));
+app.use('*', cors({ origin: 'http://localhost:3000' }));
 
-server.use('/graphql', bodyParser.json(), graphqlExpress({
+app.use('/graphql', bodyParser.json(), graphqlExpress({
   schema,
-  context: { Todo } 
+  context: { Todo }
 }));
 
-server.use('/graphiql', graphiqlExpress({
+app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql'
 }));
 
-server.listen(PORT, () =>
+app.listen(PORT, () =>
   console.log(`GraphQL Server is now running on http://localhost:${PORT}`)
 );

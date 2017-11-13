@@ -1,0 +1,21 @@
+//get all todos
+query TodoListQuery {
+  todoarr {
+    _id
+    title
+    completed
+  }
+}
+
+//add todo
+mutation {
+  addTodo(title:"another todo"){
+    _id,title,completed
+  }
+}
+//toggle todo
+mutation{
+	toggleTodo(_id:"5a09afdc7452ce1034df04d0",completed:true){
+    _id,title,completed
+  }
+}

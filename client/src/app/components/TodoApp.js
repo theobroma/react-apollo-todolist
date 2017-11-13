@@ -32,7 +32,7 @@ class TodoApp extends Component  {
 const TodoListQuery = gql`
 query TodoListQuery {
   todoarr {
-    id
+    _id
     title
     completed
   }
@@ -42,7 +42,7 @@ query TodoListQuery {
 const withTodos = graphql(
     gql`query TodoListQuery {
         todoarr {
-          id
+          _id
           title
           completed
         }
@@ -59,7 +59,7 @@ const withTodos = graphql(
 const withAddTodo = graphql(
     gql`mutation addTodo($title: String!) {
         addTodo(title: $title) {
-          id
+          _id
           title
           completed
         }
