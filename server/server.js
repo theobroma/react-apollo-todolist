@@ -41,14 +41,31 @@ const connect = () => {
  * - register mongoose Schema
  */
 connect();
+//http://graphql.org/graphql-js/authentication-and-express-middleware/
+function loggingMiddleware(req, res, next) {
+  console.log('ip:', req.ip);
+  next();
+}
+
+var root = {
+  ip: function (args, request) {
+    return request.ip;
+  }
+};
+
+
+
 
 const PORT = 7700;
 const app = express();
+app.use(loggingMiddleware);
 //same port as client use http://localhost:3000
 app.use('*', cors({ origin: 'http://localhost:3000' }));
 
 app.use('/graphql', bodyParser.json(), graphqlExpress({
-  schema,
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
   context: { Todo }
 }));
 

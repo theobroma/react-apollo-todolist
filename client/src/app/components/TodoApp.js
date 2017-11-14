@@ -19,6 +19,7 @@ class TodoApp extends Component  {
                             <AddTodo addTodo={this.props.addTodo} />
                             <TodolListNew
                                 todos={this.props.todos || []}
+                                toggleTodo={this.props.toggleTodo}
                             />
                             <pre>{JSON.stringify(this.props, '', 4)}</pre>
                         </div>
@@ -83,8 +84,37 @@ const withAddTodo = graphql(
       }),
     }
   )
+  const withToggleTodo = graphql(
+    gql`mutation toggleTodo($_id: ID!, $completed: Boolean!) {
+      toggleTodo(_id: $_id, completed: $completed) { _id completed }
+    }`,
+    {
+      props: ({ ownProps, mutate }) => ({
+        toggleTodo (_id, completed) {
+          return mutate({
+            variables: { _id, completed },
+            updateQueries: {
+              todos: (state, { mutationResult }) => {
+                return {
+                  todoarr: state.todoarr.map(t => {
+                    if (t._id===_id) {
+                      return {
+                        _id: t._id,
+                        title: t.title,
+                        completed: mutationResult.data.toggleTodo.completed,
+                      }
+                    }
+                    return t
+                  }),
+                }
+              },
+            },
+          })
+        },
+      }),
+    }
+  )
 
 
-
-const TodoAppWithData = withTodos(withAddTodo(TodoApp));
+const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(TodoApp)));
 export default TodoAppWithData;

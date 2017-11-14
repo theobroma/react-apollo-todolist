@@ -9,7 +9,12 @@ export default class Todo extends React.Component {
 
     render () {
         return (
-            <li className={cx({ complete: this.state.completed })} >
+            <li className={cx({ complete: this.state.completed })}
+              onClick={e => {
+                this.props.toggleTodo(this.props.todo._id, !this.state.completed)
+                this.setState({completed: !this.state.completed})
+              }
+            }>
             {this.props.todo.title}
             </li>
         )
