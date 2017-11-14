@@ -20,6 +20,7 @@ class TodoApp extends Component  {
                             <TodolListNew
                                 todos={this.props.todos || []}
                                 toggleTodo={this.props.toggleTodo}
+                                deleteTodo={this.props.deleteTodo}
                             />
                             <pre>{JSON.stringify(this.props, '', 4)}</pre>
                         </div>
@@ -29,16 +30,6 @@ class TodoApp extends Component  {
         )
     }
 };
-//old
-const TodoListQuery = gql`
-query TodoListQuery {
-  todoarr {
-    _id
-    title
-    completed
-  }
-}
-`;
 
 const withTodos = graphql(
     gql`query TodoListQuery {
@@ -115,6 +106,29 @@ const withAddTodo = graphql(
     }
   )
 
+  const withDeleteTodo = graphql(
+    gql`mutation deleteTodo($_id: ID!) {
+      deleteTodo(_id: $_id) { _id }
+    }`,
+    {
+      props: ({ ownProps, mutate }) => ({
+        deleteTodo (_id) {
+          return mutate({
+            variables: { _id },
+            updateQueries: {
+              todos: (state, { mutationResult }) => {
+                const itemindex = todoarr.findIndex(t => t._id === _id);
+                return {
+                  todoarr: { $splice: [itemindex, 1] }
+                }
+              },
+            },
+          })
+        },
+      }),
+    }
+  )
 
-const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(TodoApp)));
+
+const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(withDeleteTodo(TodoApp))));
 export default TodoAppWithData;

@@ -58,7 +58,7 @@ var root = {
 
 const PORT = 7700;
 const app = express();
-app.use(loggingMiddleware);
+//app.use(loggingMiddleware);
 //same port as client use http://localhost:3000
 app.use('*', cors({ origin: 'http://localhost:3000' }));
 
