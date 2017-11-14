@@ -9,20 +9,17 @@ const typeDefs = `
       completed: Boolean
     }
 
-    # This type specifies the entry points into our API. In this case
-    # there is only one - "todoarr" - which returns a list of todos.
+    # This type specifies the entry points into our API.
     type Query {
       todoarr: [TodoType]    # "[]" means this is a list of todos
       todo(_id: ID!): TodoType
     }
 
     # The mutation root type, used to define all mutations.
-
     type Mutation {
-      # A mutation to add a new todo to the list of todos
       addTodo(title: String!): TodoType
-      # A mutation to toggle todo completed
       toggleTodo(_id: ID!, completed: Boolean!): TodoType
+      deleteTodo(_id: ID!): TodoType
     }
     `;
 

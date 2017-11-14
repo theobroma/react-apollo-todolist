@@ -19,3 +19,9 @@ mutation{
     _id,title,completed
   }
 }
+//delete todo
+mutation{
+  deleteTodo(_id:"5a09afdc7452ce1034df04d0"){
+    _id,title,completed
+  }
+}

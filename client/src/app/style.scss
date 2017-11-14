@@ -5,3 +5,21 @@ li{
     }
 
 }
+.todo-list{
+    border:1px solid red;
+    li{
+        &:hover .btn-delete{
+            display: block;
+        }
+    }
+}
+.btn-delete{
+    display: none;
+    transition: color 0.2s ease-out;
+    &:hover{
+        color: #af5b5e;
+    }
+    &:after{
+        content: '×';
+    }
+}

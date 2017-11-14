@@ -12,13 +12,14 @@ export default class TodoList extends React.Component {
           key={todo._id}
           todo={todo}
           toggleTodo={this.props.toggleTodo}
+          deleteTodo={this.props.deleteTodo}
         />
       )
   }
 
   render () {
     return (
-      <ul>
+      <ul className="todo-list" >
         {this.renderTodos()}
       </ul>
     )

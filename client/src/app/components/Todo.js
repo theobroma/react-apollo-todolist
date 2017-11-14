@@ -16,6 +16,9 @@ export default class Todo extends React.Component {
               }
             }>
             {this.props.todo.title}
+            <button className="btn-delete"
+              onClick={e => { this.props.deleteTodo(this.props.todo._id) }}
+            />
             </li>
         )
     }
