@@ -23,7 +23,7 @@ networkInterface.use([{
 const client = new ApolloClient({
    networkInterface,
 });
-
+//filter reducer
 function filter (state = 'SHOW_ACTIVE', action) {
   if (action.type === 'SET_FILTER') {
     return action.filter

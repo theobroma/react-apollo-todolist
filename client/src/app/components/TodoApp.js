@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom';
+import { connect } from 'react-redux';
 import { gql,graphql } from 'react-apollo';
 //old
 import TodolList from './TodoList/TodoList';
 import CreateTodo from './CreateTodo/CreateTodo';
 //new
+import AddTodo from './AddTodo';
 import TodolListNew from './TodoListNew';
-import AddTodo from './AddTodo'
+import Filters from './Filters';
 
 class TodoApp extends Component  {
     render () {
@@ -19,10 +21,11 @@ class TodoApp extends Component  {
                             <AddTodo addTodo={this.props.addTodo} />
                             <TodolListNew
                                 todos={this.props.todos || []}
-                                filter="SHOW_COMPLETED"
+                                filter={this.props.currentFilter}
                                 toggleTodo={this.props.toggleTodo}
                                 deleteTodo={this.props.deleteTodo}
                             />
+                            <Filters setFilter={this.props.setFilter} filter={this.props.currentFilter} />
                             <pre>{JSON.stringify(this.props, '', 4)}</pre>
                         </div>
                     </div>
@@ -130,6 +133,18 @@ const withAddTodo = graphql(
     }
   )
 
+  const TodoAppWithState = connect(
+    (state) => ({ currentFilter: state.filter }),
+    (dispatch) => ({
+      setFilter: (filter) => {
+        dispatch({
+          type: 'SET_FILTER',
+          filter,
+        })
+      },
+    }),
+  )(TodoApp)
 
-const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(withDeleteTodo(TodoApp))));
+
+const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(withDeleteTodo(TodoAppWithState))));
 export default TodoAppWithData;
