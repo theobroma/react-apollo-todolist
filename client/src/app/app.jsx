@@ -24,7 +24,7 @@ const client = new ApolloClient({
    networkInterface,
 });
 
-function filter (state = 'SHOW_ALL', action) {
+function filter (state = 'SHOW_ACTIVE', action) {
   if (action.type === 'SET_FILTER') {
     return action.filter
   }

@@ -19,6 +19,7 @@ class TodoApp extends Component  {
                             <AddTodo addTodo={this.props.addTodo} />
                             <TodolListNew
                                 todos={this.props.todos || []}
+                                filter="SHOW_COMPLETED"
                                 toggleTodo={this.props.toggleTodo}
                                 deleteTodo={this.props.deleteTodo}
                             />

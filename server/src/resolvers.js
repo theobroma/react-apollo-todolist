@@ -24,14 +24,3 @@ export const resolvers =  {
     },
   }
 };
-
-
-/*Todo.findByIdAndRemove(req.params.todoId, (err, todo) => {
-    // We'll create a simple object to send back with a message and the id of the document that was removed
-    // You can really do this however you want, though.
-    le response = {
-        message: "Todo successfully deleted",
-        id: todo._id
-    };
-    res.status(200).send(response);
-});*/
