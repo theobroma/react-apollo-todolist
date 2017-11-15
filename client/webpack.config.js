@@ -25,8 +25,7 @@ module.exports = function makeConfig() {
                 use:{
                     'loader':'babel-loader',
                     options: {
-                        'presets': ['env','react']
-                    }
+                        'presets': ['env','react','stage-0']                    }
                 },
                 exclude: /node_modules/
             },

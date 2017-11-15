@@ -4,12 +4,8 @@ import Todo from './Todo'
 import todoarr from './mockdata';
 
 export default class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.filterTodos = this.filterTodos.bind(this);
-  }
 
-  filterTodos(todo){
+  _filterTodos = (todo) => {
     console.log(this.props.filter);
     if(this.props.filter === 'SHOW_ALL'){
       return todo;
@@ -22,7 +18,7 @@ export default class TodoList extends React.Component {
 
   renderTodos () {
     return this.props.todos
-      .filter(this.filterTodos)
+      .filter(this._filterTodos)
       .reverse()
       .map(todo =>
         <Todo
