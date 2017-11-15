@@ -5,6 +5,7 @@ import todoarr from './mockdata';
 
 export default class TodoList extends React.Component {
 
+  //my
   _filterTodos = (todo) => {
     console.log(this.props.filter);
     if(this.props.filter === 'SHOW_ALL'){
@@ -16,9 +17,15 @@ export default class TodoList extends React.Component {
     }
   }
 
+  filterTodos = todo => (
+    this.props.filter === 'SHOW_ALL' ||
+    this.props.filter === 'SHOW_ACTIVE' && !todo.completed ||
+    this.props.filter === 'SHOW_COMPLETED' && todo.completed
+  )
+
   renderTodos () {
     return this.props.todos
-      .filter(this._filterTodos)
+      .filter(this.filterTodos)
       .reverse()
       .map(todo =>
         <Todo
