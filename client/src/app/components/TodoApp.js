@@ -9,27 +9,41 @@ import CreateTodo from './CreateTodo/CreateTodo';
 import AddTodo from './AddTodo';
 import TodolListNew from './TodoListNew';
 import Filters from './Filters';
+//testing HTML structure
+import TodoMVC from './TodoMVC';
+
+// class TodoApp extends Component  {
+//     render () {
+//         return (
+//             <div className="App">
+//                 <div className="container">
+//                     <div className="row">
+//                         <div className="col-lg-4 col-lg-offset-4">
+//                             <h3 className="center">React , GraphQL , Apollo</h3>
+//                             <AddTodo addTodo={this.props.addTodo} />
+//                             <TodolListNew
+//                                 todos={this.props.todos || []}
+//                                 filter={this.props.currentFilter}
+//                                 toggleTodo={this.props.toggleTodo}
+//                                 deleteTodo={this.props.deleteTodo}
+//                             />
+//                             <Filters setFilter={this.props.setFilter} filter={this.props.currentFilter} />
+//                             <pre>{JSON.stringify(this.props, '', 4)}</pre>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         )
+//     }
+// };
 
 class TodoApp extends Component  {
     render () {
         return (
             <div className="App">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-4 col-lg-offset-4">
-                            <h3 className="center">React , GraphQL , Apollo</h3>
-                            <AddTodo addTodo={this.props.addTodo} />
-                            <TodolListNew
-                                todos={this.props.todos || []}
-                                filter={this.props.currentFilter}
-                                toggleTodo={this.props.toggleTodo}
-                                deleteTodo={this.props.deleteTodo}
-                            />
-                            <Filters setFilter={this.props.setFilter} filter={this.props.currentFilter} />
-                            <pre>{JSON.stringify(this.props, '', 4)}</pre>
-                        </div>
-                    </div>
-                </div>
+              <section className="todoapp">
+                <TodoMVC/>
+              </section>
             </div>
         )
     }
