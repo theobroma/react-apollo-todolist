@@ -1,19 +1,23 @@
-import React from 'react'
+import React from 'react';
+const ENTER_KEY = 13;
 
 export default class AddTodo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.focusTextInput = this.focusTextInput.bind(this);
-  }
 
-  focusTextInput() {
+  focusTextInput = () => {
     // Explicitly focus the text input using the raw DOM API
     this.textInput.focus();
   }
 
-  _onSubmit () {
-    this.props.addTodo(this.input.value)
-    this.input.value = ''
+  handleNewTodoKeyDown = (event) => {
+    if (event.keyCode !== ENTER_KEY) {
+      return;
+    }
+    event.preventDefault();
+
+    let val = this.textInput.value.trim();
+    this.props.addTodo(val)
+    //console.log(val);
+    this.textInput.value = '';
   }
 
   render () {
@@ -21,14 +25,11 @@ export default class AddTodo extends React.Component {
       <div>
         <input
           className="new-todo"
-          placeholder="What needs to be done"
+          placeholder="What needs to be done?"
           ref={(input) => { this.textInput = input; }}
           onClick={this.focusTextInput}
-
+          onKeyDown={this.handleNewTodoKeyDown}
         />
-        <button onClick={e => this._onSubmit()}>
-          Add Todo
-        </button>
       </div>
     )
   }
