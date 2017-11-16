@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom';
 import { connect } from 'react-redux';
-import { gql,graphql } from 'react-apollo';
+import { compose,gql,graphql } from 'react-apollo';
 //old
 import TodolList from './TodoList/TodoList';
 import CreateTodo from './CreateTodo/CreateTodo';
@@ -99,6 +99,7 @@ const withAddTodo = graphql(
       }),
     }
   )
+
   const withToggleTodo = graphql(
     gql`mutation toggleTodo($_id: ID!, $completed: Boolean!) {
       toggleTodo(_id: $_id, completed: $completed) { _id completed }
@@ -186,9 +187,6 @@ const withAddTodo = graphql(
     }
   )
 
-
-
-
   const TodoAppWithState = connect(
     (state) => ({ currentFilter: state.filter }),
     (dispatch) => ({
@@ -201,6 +199,13 @@ const withAddTodo = graphql(
     }),
   )(TodoApp)
 
+const TodoAppWithData = compose(
+  withDeleteTodo,
+  withToggleAll,
+  withToggleTodo,
+  withAddTodo,
+  withTodos
+)(TodoAppWithState);
 
-const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(withToggleAll(withDeleteTodo(TodoAppWithState)))));
+//const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(withToggleAll(withDeleteTodo(TodoAppWithState)))));
 export default TodoAppWithData;
