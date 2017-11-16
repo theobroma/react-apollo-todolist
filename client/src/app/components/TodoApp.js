@@ -12,42 +12,51 @@ import Filters from './Filters';
 //testing HTML structure
 import TodoMVC from './TodoMVC';
 
-// class TodoApp extends Component  {
-//     render () {
-//         return (
-//             <div className="App">
-//                 <div className="container">
-//                     <div className="row">
-//                         <div className="col-lg-4 col-lg-offset-4">
-//                             <h3 className="center">React , GraphQL , Apollo</h3>
-//                             <AddTodo addTodo={this.props.addTodo} />
-//                             <TodolListNew
-//                                 todos={this.props.todos || []}
-//                                 filter={this.props.currentFilter}
-//                                 toggleTodo={this.props.toggleTodo}
-//                                 deleteTodo={this.props.deleteTodo}
-//                             />
-//                             <Filters setFilter={this.props.setFilter} filter={this.props.currentFilter} />
-//                             <pre>{JSON.stringify(this.props, '', 4)}</pre>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         )
-//     }
-// };
-
 class TodoApp extends Component  {
     render () {
         return (
             <div className="App">
               <section className="todoapp">
-                <TodoMVC/>
+                {/*Header*/}
+                <header className="header">
+                  <h1>todos</h1>
+                  <AddTodo addTodo={this.props.addTodo} />
+                </header>
+                {/*Main*/}
+                <section className="main">
+                  <input
+                    className="toggle-all"
+                    type="checkbox"
+                  />
+                  <label htmlFor="toggle-all">toggle-all</label>
+                  <TodolListNew
+                    todos={this.props.todos || []}
+                    filter={this.props.currentFilter}
+                    toggleTodo={this.props.toggleTodo}
+                    deleteTodo={this.props.deleteTodo}
+                  />
+                </section>
+                {/*Footer*/}
+                <Filters setFilter={this.props.setFilter} filter={this.props.currentFilter} />
+                {/*<pre>{JSON.stringify(this.props, '', 4)}</pre>*/}
               </section>
             </div>
         )
     }
 };
+
+//component for testing https://github.com/tastejs/todomvc-app-css
+// class TodoApp extends Component  {
+//     render () {
+//         return (
+//             <div className="App">
+//               <section className="todoapp">
+//                 <TodoMVC/>
+//               </section>
+//             </div>
+//         )
+//     }
+// };
 
 const withTodos = graphql(
     gql`query TodoListQuery {

@@ -29,7 +29,7 @@ export default class TodoList extends React.Component {
     return (
       <ul className="todo-list" >
         {this.renderTodos()}
-        <pre>{JSON.stringify(this.props.filter, '', 4)}</pre>
+        {/*<pre>{JSON.stringify(this.props.filter, '', 4)}</pre>*/}
       </ul>
     )
   }

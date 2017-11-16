@@ -19,15 +19,23 @@ mongoose.connect(mongoUri, {
 
 const arr = [
   new Todo({
-    title:"first mongo todo",
+    title:"first MONGO todo",
     completed:true
   }),
   new Todo({
-    title:"second mongo todo",
+    title:"second MONGO todo",
     completed:false
   }),
   new Todo({
-    title:"third mongo todo",
+    title:"third MONGO todo",
+    completed:false
+  }),
+  new Todo({
+    title:"fourth MONGO todo",
+    completed:false
+  }),
+  new Todo({
+    title:"fifth MONGO todo",
     completed:false
   })
 ];

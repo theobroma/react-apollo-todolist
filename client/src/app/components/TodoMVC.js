@@ -12,10 +12,7 @@ export class Todo extends React.Component {
 
     render () {
         return (
-          <li className={cx({
-            completed: this.props.todo.completed,
-            editing: this.props.editing
-          })}>
+          <li className={cx({ completed: this.props.todo.completed,editing: this.props.editing})}>
           <div className="view">
             <input className="toggle" type="checkbox" />
             <label onDoubleClick={this.handleEdit}>
@@ -83,7 +80,6 @@ export default class TodoMVC extends Component {
             Clear completed
           </button>
         </footer>
-
       </div>
     );
   }
