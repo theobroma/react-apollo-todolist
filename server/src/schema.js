@@ -19,6 +19,7 @@ const typeDefs = `
     type Mutation {
       addTodo(title: String!): TodoType
       toggleTodo(_id: ID!, completed: Boolean!): TodoType
+      toggleAll: [TodoType]
       deleteTodo(_id: ID!): TodoType
     }
     `;
