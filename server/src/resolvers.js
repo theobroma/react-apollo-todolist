@@ -23,7 +23,7 @@ export const resolvers =  {
       //get all current todos
       const todosArr = await Todo.find();
       //logic of how to switch "completed" field of each todo:
-      //if some of todos not yet completed - toggle all to true
+      //if SOME of todos not yet completed - toggle all to true
       //else - toggle all to false
       const someNotCompleted =_some(todosArr, {"completed": false });
       //toggle completed in each document

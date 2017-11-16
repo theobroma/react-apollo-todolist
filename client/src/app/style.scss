@@ -1,30 +1,8 @@
-li{
-    &.complete{
-        color: #d9d9d9;
-        text-decoration: line-through;
-    }
-
-}
-
-a.inactive {
- text-decoration: none;
-}
-
-.todo-list{
-    border:1px solid red;
-    li{
-        &:hover .btn-delete{
-            display: block;
-        }
-    }
-}
-.btn-delete{
-    display: none;
-    transition: color 0.2s ease-out;
-    &:hover{
-        color: #af5b5e;
-    }
-    &:after{
-        content: '×';
-    }
+.toggle-all{
+    z-index:9999;
+    height: 40px;
+    width: 40px;
+    color:red;
+    display:block;
+    background-color: red;
 }

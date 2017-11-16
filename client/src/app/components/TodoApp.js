@@ -7,6 +7,7 @@ import TodolList from './TodoList/TodoList';
 import CreateTodo from './CreateTodo/CreateTodo';
 //new
 import AddTodo from './AddTodo';
+import ToggleAll from './ToggleAll';
 import TodolListNew from './TodoListNew';
 import Filters from './Filters';
 //testing HTML structure
@@ -24,11 +25,7 @@ class TodoApp extends Component  {
                 </header>
                 {/*Main*/}
                 <section className="main">
-                  <input
-                    className="toggle-all"
-                    type="checkbox"
-                  />
-                  <label htmlFor="toggle-all">toggle-all</label>
+                  <ToggleAll toggleAll = {this.props.toggleAll}/>
                   <TodolListNew
                     todos={this.props.todos || []}
                     filter={this.props.currentFilter}
@@ -133,6 +130,39 @@ const withAddTodo = graphql(
     }
   )
 
+  const withToggleAll = graphql(
+    gql`mutation toggleAll {
+      toggleAll{
+        _id
+        title
+        completed }
+    }`,
+    {
+      props: ({ ownProps, mutate }) => ({
+        toggleAll () {
+          return mutate({
+            updateQueries: {
+              todos: (state, { mutationResult }) => {
+                return {
+                  todoarr: state.todoarr.map(t => {
+                    if (t._id===_id) {
+                      return {
+                        _id: t._id,
+                        title: t.title,
+                        completed: mutationResult.data.toggleAll.completed,
+                      }
+                    }
+                    return t
+                  }),
+                }
+              },
+            },
+          })
+        },
+      }),
+    }
+  )
+
   const withDeleteTodo = graphql(
     gql`mutation deleteTodo($_id: ID!) {
       deleteTodo(_id: $_id) { _id }
@@ -156,6 +186,9 @@ const withAddTodo = graphql(
     }
   )
 
+
+
+
   const TodoAppWithState = connect(
     (state) => ({ currentFilter: state.filter }),
     (dispatch) => ({
@@ -169,5 +202,5 @@ const withAddTodo = graphql(
   )(TodoApp)
 
 
-const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(withDeleteTodo(TodoAppWithState))));
+const TodoAppWithData = withTodos(withAddTodo(withToggleTodo(withToggleAll(withDeleteTodo(TodoAppWithState)))));
 export default TodoAppWithData;

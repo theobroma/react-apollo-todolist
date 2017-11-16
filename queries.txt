@@ -25,3 +25,9 @@ mutation{
     _id,title,completed
   }
 }
+//toggle all
+mutation{
+	toggleAll{
+    _id,title,completed
+  }
+}
