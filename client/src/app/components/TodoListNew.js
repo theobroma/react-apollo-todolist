@@ -1,36 +1,34 @@
-import React from 'react'
-import Todo from './Todo'
+import React from 'react';
+import Todo from './Todo';
 //mock data if needed
 import todoarr from './mockdata';
 
 export default class TodoList extends React.Component {
-
-  _filterTodos = todo => (
+  _filterTodos = todo =>
     this.props.filter === 'SHOW_ALL' ||
-    this.props.filter === 'SHOW_ACTIVE' && !todo.completed ||
-    this.props.filter === 'SHOW_COMPLETED' && todo.completed
-  )
+    (this.props.filter === 'SHOW_ACTIVE' && !todo.completed) ||
+    (this.props.filter === 'SHOW_COMPLETED' && todo.completed);
 
-  renderTodos () {
+  renderTodos() {
     return this.props.todos
       .filter(this._filterTodos)
       .reverse()
-      .map(todo =>
+      .map(todo => (
         <Todo
           key={todo._id}
           todo={todo}
           toggleTodo={this.props.toggleTodo}
           deleteTodo={this.props.deleteTodo}
         />
-      )
+      ));
   }
 
-  render () {
+  render() {
     return (
-      <ul className="todo-list" >
+      <ul className="todo-list">
         {this.renderTodos()}
         {/*<pre>{JSON.stringify(this.props.filter, '', 4)}</pre>*/}
       </ul>
-    )
+    );
   }
 }
