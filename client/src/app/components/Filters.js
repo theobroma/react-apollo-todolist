@@ -1,11 +1,11 @@
-import React from 'react'
-import FilterLink from './FilterLink'
+import React from 'react';
+import FilterLink from './FilterLink';
 
 export default class Filters extends React.Component {
-
-  render () {
+  render() {
     return (
       <footer className="footer">
+        {/* NOT FINISHED */}
         <span className="todo-count">
           <strong>12</strong> items left
         </span>
@@ -19,11 +19,10 @@ export default class Filters extends React.Component {
           <FilterLink type={'SHOW_COMPLETED'} {...this.props}>
             Completed
           </FilterLink>
-          <button className="clear-completed">
-            Clear completed
-          </button>
+          {/* NOT FINISHED */}
+          <button className="clear-completed">Clear completed</button>
         </ul>
       </footer>
-    )
+    );
   }
 }

@@ -3,10 +3,7 @@ import { render } from 'react-dom';
 import { connect } from 'react-redux';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-//old
-import TodolList from './TodoList/TodoList';
-import CreateTodo from './CreateTodo/CreateTodo';
-//new
+
 import AddTodo from './AddTodo';
 import ToggleAll from './ToggleAll';
 import TodolListNew from './TodoListNew';

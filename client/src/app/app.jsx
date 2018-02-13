@@ -62,7 +62,6 @@ const store = createStore(
     compose(applyMiddleware(logger), window.devToolsExtension ? window.devToolsExtension() : f => f)
 );
 
-// <ApolloProvider client={client} store={store}> was here
 render(
     <ApolloProvider client={client}>
         <Provider store={store}>
