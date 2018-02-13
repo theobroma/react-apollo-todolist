@@ -1,4 +1,5 @@
 import _some from 'lodash/some';
+import _filter from 'lodash/filter';
 
 export const resolvers = {
   Query: {
@@ -43,7 +44,12 @@ export const resolvers = {
     },
     clearCompleted: async (parent, args, { Todo }) => {
       const todosArr = await Todo.find();
-      console.log(todosArr);
+      const completedTodos = _filter(todosArr, { completed: true });
+      await Promise.all(
+        completedTodos.map(async todo => {
+          const t = await Todo.remove({ _id: todo._id });
+        })
+      );
     },
     deleteTodo: async (parent, args, { Todo }) => {
       const todo = await Todo.findByIdAndRemove(args._id);
