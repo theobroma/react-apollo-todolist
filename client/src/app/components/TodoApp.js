@@ -32,8 +32,12 @@ class TodoApp extends Component {
             />
           </section>
           {/*Footer*/}
-          <Filters setFilter={this.props.setFilter} filter={this.props.currentFilter} />
-          <pre>{JSON.stringify(this.props, '', 4)}</pre>
+          <Filters
+            setFilter={this.props.setFilter}
+            filter={this.props.currentFilter}
+            clearCompleted={this.props.clearCompleted}
+          />
+          {/* <pre>{JSON.stringify(this.props, '', 4)}</pre> */}
         </section>
       </div>
     );
@@ -119,16 +123,7 @@ const withToggleTodo = graphql(
           updateQueries: {
             todos: (state, { mutationResult }) => {
               return {
-                todoarr: state.todoarr.map(t => {
-                  if (t._id === _id) {
-                    return {
-                      _id: t._id,
-                      title: t.title,
-                      completed: mutationResult.data.toggleTodo.completed
-                    };
-                  }
-                  return t;
-                })
+                todos: data.todoarr
               };
             }
           }
@@ -151,6 +146,42 @@ const withToggleAll = graphql(
   {
     props: ({ ownProps, mutate }) => ({
       toggleAll() {
+        return mutate({
+          updateQueries: {
+            todos: (state, { mutationResult }) => {
+              return {
+                todoarr: state.todoarr.map(t => {
+                  if (t._id === _id) {
+                    return {
+                      _id: t._id,
+                      title: t.title,
+                      completed: mutationResult.data.toggleAll.completed
+                    };
+                  }
+                  return t;
+                })
+              };
+            }
+          }
+        });
+      }
+    })
+  }
+);
+
+const withClearCompleted = graphql(
+  gql`
+    mutation clearCompleted {
+      clearCompleted {
+        _id
+        title
+        completed
+      }
+    }
+  `,
+  {
+    props: ({ ownProps, mutate }) => ({
+      clearCompleted() {
         return mutate({
           updateQueries: {
             todos: (state, { mutationResult }) => {
@@ -216,6 +247,7 @@ const TodoAppWithState = connect(
 
 const TodoAppWithData = compose(
   withDeleteTodo,
+  withClearCompleted,
   withToggleAll,
   withToggleTodo,
   withAddTodo,

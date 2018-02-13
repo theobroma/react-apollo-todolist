@@ -1,5 +1,6 @@
 import React from 'react';
 import FilterLink from './FilterLink';
+import ClearCompleted from './ClearCompleted';
 
 export default class Filters extends React.Component {
   render() {
@@ -20,8 +21,8 @@ export default class Filters extends React.Component {
             Completed
           </FilterLink>
           {/* NOT FINISHED */}
-          <button className="clear-completed">Clear completed</button>
         </ul>
+        <ClearCompleted {...this.props} />
       </footer>
     );
   }

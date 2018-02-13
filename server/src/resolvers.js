@@ -41,6 +41,10 @@ export const resolvers = {
       //console.log(someNotCompleted);
       return newArr;
     },
+    clearCompleted: async (parent, args, { Todo }) => {
+      const todosArr = await Todo.find();
+      console.log(todosArr);
+    },
     deleteTodo: async (parent, args, { Todo }) => {
       const todo = await Todo.findByIdAndRemove(args._id);
       return todo;
