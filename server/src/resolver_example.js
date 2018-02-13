@@ -1,11 +1,3 @@
-const channels = [{
-  id: 1,
-  name: 'soccer',
-}, {
-  id: 2,
-  name: 'baseball',
-}];
-
 const todoarr = [{
   id: 1,
   title: 'first',

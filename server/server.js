@@ -9,7 +9,6 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Todo from './db/models/todo';
 import loadModels from './db/models';
-//import { connect } from './db';
 //apollo
 import { schema } from './src/schema';
 
