@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -9,14 +9,13 @@ export default class ClearCompleted extends Component {
   };
 
   render() {
-    console.log(this.props.client);
     return (
-      <div>
+      <Fragment>
         <button className="clear-completed" onClick={this.handleClick}>
-          Clear completed
+          Clear completed!
         </button>
         {/* <pre>{JSON.stringify(this.props, '', 4)}</pre> */}
-      </div>
+      </Fragment>
     );
   }
 }

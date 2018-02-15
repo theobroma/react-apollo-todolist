@@ -55,7 +55,10 @@ const rootReducer = combineReducers({
     filter
 });
 
-const logger = createLogger();
+const logger = createLogger({
+    // Collapse actions that don't have errors
+    collapsed: (getState, action, logEntry) => !logEntry.error
+});
 
 const store = createStore(
     rootReducer,
