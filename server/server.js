@@ -1,9 +1,7 @@
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
-import {
-  graphqlExpress,
-  graphiqlExpress,
-} from 'graphql-server-express';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
 //mongo
 import mongoose from 'mongoose';
@@ -18,7 +16,7 @@ const connect = () => {
   // Find the appropriate database to connect to, default to localhost if not found.
   const connectDb = () => {
     mongoose.Promise = global.Promise;
-    mongoose.connect(db, (err) => {
+    mongoose.connect(db, err => {
       if (err) {
         console.log(`===>  Error connecting to ${db}`);
         console.log(`Reason: ${err}`);
@@ -47,31 +45,45 @@ function loggingMiddleware(req, res, next) {
 }
 
 var root = {
-  ip: function (args, request) {
+  ip: function(args, request) {
     return request.ip;
   }
 };
 
-
-
-
-const PORT = 7700;
 const app = express();
+
+app.set('port', process.env.PORT || 8080);
+app.use(express.static(path.join(__dirname, 'public', 'build')));
+
 //app.use(loggingMiddleware);
+
+// All routes in the end
 //same port as client use http://localhost:3000
 app.use('*', cors({ origin: 'http://localhost:3000' }));
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
-  context: { Todo }
-}));
+app.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+    context: { Todo }
+  })
+);
 
-app.use('/graphiql', graphiqlExpress({
-  endpointURL: '/graphql'
-}));
+app.use(
+  '/graphiql',
+  graphiqlExpress({
+    endpointURL: '/graphql'
+  })
+);
 
-app.listen(PORT, () =>
-  console.log(`GraphQL Server is now running on http://localhost:${PORT}`)
+// Redirect all non api requests to the index
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'));
+});
+
+app.listen(app.get('port'), () =>
+  console.log(`GraphQL Server is now running on http://localhost:${app.get('port')}`)
 );

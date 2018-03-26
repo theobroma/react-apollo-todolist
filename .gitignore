@@ -1,2 +1,6 @@
 # Dependency directories
 node_modules/
+#Client build folder
+client/dist
+#Server public folder
+server/public/build
