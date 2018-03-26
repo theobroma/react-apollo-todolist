@@ -8,8 +8,7 @@ const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost/apollotodo';
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoUri, {
   keepAlive: true,
-  reconnectTries: Number.MAX_VALUE,
-  useMongoClient: true
+  reconnectTries: Number.MAX_VALUE
 })
 .then(() => {
     console.log('Connected to MongoDB at ', mongoUri);
