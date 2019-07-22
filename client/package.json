@@ -13,7 +13,9 @@
         "clean:client": "rimraf ./dist",
         "clean:server": "rimraf ./../server/public/build/*"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "webpack-dev-server": "^3.7.2"
+    },
     "dependencies": {
         "babel": "^6.23.0",
         "babel-core": "^6.26.0",
@@ -33,7 +35,6 @@
         "sass-loader": "^6.0.6",
         "style-loader": "^0.20.1",
         "webpack": "^3.5.5",
-        "webpack-dev-server": "^2.7.1",
         "apollo-cache-inmemory": "^1.1.7",
         "apollo-client": "^2.2.3",
         "apollo-link-http": "^1.3.3",
